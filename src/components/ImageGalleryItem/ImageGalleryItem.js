@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React from 'react'
+// import PropTypes from 'prop-types';
 import styles from './ImageGalleryItem.module.css'
 
-
-const ImageGalleryItem = ({ webimg, }) =>(
+const ImageGalleryItem = ({ webimg }) =>(
 <li className={styles.ImageGalleryItem}>
   <img 
     src={webimg} 
