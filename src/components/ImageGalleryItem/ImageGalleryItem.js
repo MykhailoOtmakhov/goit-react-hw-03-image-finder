@@ -2,8 +2,9 @@ import React from 'react'
 // import PropTypes from 'prop-types';
 import styles from './ImageGalleryItem.module.css'
 
-const ImageGalleryItem = ({ webimg }) =>(
-<li className={styles.ImageGalleryItem}>
+const ImageGalleryItem = ({ webimg, showImage }) =>(
+<li className={styles.ImageGalleryItem}
+    onClick={showImage}>
   <img 
     src={webimg} 
     alt="" 

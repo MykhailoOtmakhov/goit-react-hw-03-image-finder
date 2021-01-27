@@ -32,7 +32,9 @@ export default class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery imageTag={this.state.imageTag} />
         {/* <ImageApi imageTag={this.state.imageTag}/> */}
-        {/* <Modal onClose={this.toggleModal}>
+        {/* <Modal 
+          onClose={this.toggleModal}
+          >
         </Modal> */}
         <ToastContainer autoClose={2500}/>
       </div> 
