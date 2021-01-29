@@ -9,7 +9,7 @@ import Searchbar from './components/Searchbar/Searchbar'
 export default class App extends Component {
   state = {
     imagesTag: '',
-    // page: 1,
+    page: 1,
     // images: null,
     // loading: false,
     // showModal: false,
@@ -30,7 +30,10 @@ export default class App extends Component {
     return(
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery imageTag={this.state.imageTag} />
+        <ImageGallery 
+          imageTag={this.state.imageTag}
+          // page={this.state.page}
+           />
         {/* <ImageApi imageTag={this.state.imageTag}/> */}
         {/* <Modal 
           onClose={this.toggleModal}

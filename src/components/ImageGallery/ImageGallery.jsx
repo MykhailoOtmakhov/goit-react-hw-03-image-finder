@@ -12,6 +12,7 @@ export default class ImageGallery extends Component {
         images: null,
         error: null,
         status: 'idle',
+        hits: [],
         page: 1,
     }
       componentDidUpdate(prevProps, prevState){
@@ -23,35 +24,24 @@ export default class ImageGallery extends Component {
           this.setState({status: 'pending'});
 
           fetchAPI.fetchImage(nextName,actualPage)
-          .then(images => this.setState({images, status: 'resolved'}))
+          .then(images => this.setState({images, hits: images.hits, status: 'resolved'}))
           .catch(error => this.setState({error, status: 'resjected'}))
         }
-        console.log(this.state);
       }
 
-          moreImages = ({state}) =>{            
+          moreImages = () =>{            
+            const {page, images, hits} = this.state;
+            const actualPage = page + 1;
+            const newImages = images;
+            const actHits = [...hits, ...newImages.hits];
 
-            const nextPage = this.state.page + 1;
-            const actualImages = this.state.images;
-            // console.log(actualImages);
-
-            fetchAPI.fetchImage(actualImages, nextPage)
-            .then(images => this.setState({images, status: 'resolved'}))
-            .catch(error => this.setState({error, status: 'resjected'}))
-          
-            this.setState(prevState=>({            
-              page: this.state.page + 1,
-              // images: [actualImages, ...prevState.images], //??????
-            })) 
-            console.log(this.state);
+            fetchAPI.fetchImage(this.props.imageTag, actualPage)
+            .then(newImages => this.setState({newImages, page:actualPage, hits:actHits, status: 'resolved'}))
+            .catch(error => this.setState({error, status: 'resjected'}))        
           }
 
-          // showImage = () =>{
-            
-          // }
-
   render() {
-    const {images, error, status} = this.state;
+    const {images, error, status, hits} = this.state;
 
     if(status === 'idle') {
       return <div>Введите, что искать</div>
@@ -80,8 +70,9 @@ export default class ImageGallery extends Component {
       return  (
         <div>
           <ul className={styles.ImageGallery}>
-            {images.hits.map(({id, webformatURL, largeImageURL}) =>(
+            {hits.map(({id, webformatURL, largeImageURL}) =>(
               <ImageGalleryItem 
+                // hits={hits}
                 key = {id}
                 webimg = {webformatURL}
                 largeimg = {largeImageURL}

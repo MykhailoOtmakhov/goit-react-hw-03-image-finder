@@ -1,7 +1,8 @@
 function fetchImage(nextName, actualPage){
     const MY_KEY = '19192524-a42a2a32afb109ad508e945f7'
     const BASE_URL = 'https://pixabay.com/api'
-    return fetch(`${BASE_URL}/?q=${nextName}&page=${actualPage}&key=${MY_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
+    const perPage = 12;
+    return fetch(`${BASE_URL}/?q=${nextName}&page=${actualPage}&key=${MY_KEY}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
     .then(response => {
         if(response.ok){
             return response.json();
