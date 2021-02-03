@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styles from '../Modal/Modal.module.css'
 
-export default class Modal extends Component {
-    static propTypes = {
-        prop: PropTypes
-    }
+class Modal extends Component {
 
     componentDidMount(){
         window.addEventListener('keydown', this.handleEsc)
@@ -20,15 +18,34 @@ export default class Modal extends Component {
         }
     }
 
+    handleBackdropClick = event => {
+        if(event.currentTarget === event.target) {
+            this.props.onClose();
+        }
+    }
+
     render() {
         return (
-            <div className="Overlay">
-              <div className="Modal"
-                    >
-                <img src="" alt="" />
+            <div 
+                className={styles.Overlay}
+                onClick={this.handleBackdropClick}
+            >
+              <div className={styles.Modal}>
+                <img 
+                    src={this.props.largeimg} 
+                    // 
+                    alt="" 
+                    className=""/>
               </div>
             </div>
         )
     }
 }
 
+Modal.propTypes={
+    onClose: PropTypes.func,
+    onImgClick: PropTypes.func,
+    largeimg: PropTypes.string,
+}
+
+export default Modal
