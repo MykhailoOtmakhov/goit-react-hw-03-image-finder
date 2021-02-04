@@ -110,9 +110,7 @@ export default class ImageGallery extends Component {
             ))
             }
           </ul>
-          {hits.length === 0
-              ? ''
-              : <Button 
+          {hits.length > 0 && <Button 
             onButtonClick={this.moreImages}
           />}
           {showModal &&  
